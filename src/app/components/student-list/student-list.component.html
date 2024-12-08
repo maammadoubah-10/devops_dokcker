@@ -1,0 +1,82 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Liste des étudiants</h1>
+    
+    <!-- Bouton Ajouter un étudiant -->
+    <button class="btn btn-primary" (click)="openAddModal()">Ajouter un étudiant</button>
+  
+    <!-- Table des étudiants -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.id }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <!-- Bouton Modifier -->
+            <button class="btn btn-primary" (click)="openEditModal(student)">Modifier</button>
+            <!-- Bouton Supprimer -->
+            <button class="btn btn-danger" (click)="deleteStudent(student.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal Ajouter un étudiant -->
+  <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addStudentModalLabel">Ajouter un étudiant</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addStudent()">
+            <div class="mb-3">
+              <label for="studentName" class="form-label">Nom</label>
+              <input type="text" class="form-control" [(ngModel)]="newStudent.name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="studentEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" [(ngModel)]="newStudent.email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-success">Ajouter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Modifier un étudiant -->
+  <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editStudentModalLabel">Modifier Étudiant</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateStudent()">
+            <div class="mb-3">
+              <label for="studentName" class="form-label">Nom</label>
+              <input type="text" class="form-control" [(ngModel)]="editStudent.name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="studentEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" [(ngModel)]="editStudent.email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-success">Mettre à jour</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
